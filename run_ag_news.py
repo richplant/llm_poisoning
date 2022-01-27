@@ -39,7 +39,7 @@ def compute_metrics(p):
     predictions = np.argmax(preds, axis=1)
     acc = ACCURACY.compute(predictions=predictions, references=labels)
     f1 = F1.compute(predictions=predictions, references=labels, average='weighted')
-    return {"accuracy": acc, "f1": f1}
+    return {**acc, **f1}
 
 
 def main():
@@ -52,7 +52,7 @@ def main():
         num_labels = len(data['train'].unique('label'))
         data_tok = data.map(preprocess, fn_kwargs={'tokenizer': tokenizer}, batched=True)
         train_set = data_tok['train'].shuffle(seed=SEED).select(range(10_000))
-        test_set = data_tok['test'].shuffle(seed=SEED).select(range(10_000))
+        test_set = data_tok['test'].shuffle(seed=SEED).select(range(5_000))
 
         # Train
         model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=num_labels)
@@ -86,8 +86,8 @@ def main():
 
         # Eval
         metrics = trainer.evaluate()
-        trainer.log_metrics("eval", metrics)
-        trainer.save_metrics("eval", metrics)
+        trainer.log_metrics("test", metrics)
+        trainer.save_metrics("test", metrics)
 
         # Flipped train sets
         for flip_ratio in FLIP_RATES:
