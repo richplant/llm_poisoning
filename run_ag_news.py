@@ -4,8 +4,20 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification, Data
     Trainer
 
 SEED = 42
-MODELS = ['bert-base-uncased', 'roberta-base', 'distilbert-base-uncased', 'albert-base-v2']
-FLIP_RATES = [0.01, 0.02, 0.05, 0.1, 0.25, 0.5]
+MODELS = [
+    'bert-base-uncased',
+    'roberta-base',
+    'distilbert-base-uncased',
+    'albert-base-v2'
+]
+FLIP_RATES = [
+    0.01,
+    0.02,
+    0.05,
+    0.1,
+    0.25,
+    0.5
+]
 ACCURACY = load_metric('accuracy')
 F1 = load_metric('f1')
 RND = np.random.default_rng(SEED)

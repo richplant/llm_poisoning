@@ -11,8 +11,20 @@ GLUE_TASK_TO_KEY = {
     "wnli": ("sentence1", "sentence2"),
     "rte": ("sentence1", "sentence2"),
 }
-MODELS = ['bert-base-uncased', 'roberta-base', 'distilbert-base-uncased', 'albert-base-v2']
-FLIP_RATES = [0.01, 0.02, 0.05, 0.1, 0.25, 0.5]
+MODELS = [
+    'bert-base-uncased',
+    'roberta-base',
+    'distilbert-base-uncased',
+    'albert-base-v2'
+]
+FLIP_RATES = [
+    0.01,
+    0.02,
+    0.05,
+    0.1,
+    0.25,
+    0.5
+]
 METRIC = load_metric('accuracy')
 RND = np.random.default_rng(SEED)
 
